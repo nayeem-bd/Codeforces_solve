@@ -31,21 +31,20 @@ For DAG :
 
 if contain cycle:
 
+  #define M 55
+  int visited[M], cycle = 0;
+  vector<int> edge[M];
 
-#define M 55
-int visited[M], cycle = 0;
-vector<int> edge[M];
+  void visit( int p ) {
+      if( visited[p] == 2 || cycle ) return;
+      // we won't process anything if we already have found a cycle
+      if( visited[p] == 1 ) {
+          cycle = 1; // found cycle
+          return;
+      }
 
-void visit( int p ) {
-    if( visited[p] == 2 || cycle ) return;
-    // we won't process anything if we already have found a cycle
-    if( visited[p] == 1 ) {
-        cycle = 1; // found cycle
-        return;
-    }
-   
-    visited[p] = 1;
-    for(int i=0; i<edge[p].size(); i++) visit( edge[p][i] );
-    visited[p] = 2;
-}
+      visited[p] = 1;
+      for(int i=0; i<edge[p].size(); i++) visit( edge[p][i] );
+      visited[p] = 2;
+  }
 
