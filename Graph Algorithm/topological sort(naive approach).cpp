@@ -10,14 +10,17 @@ int i, j, k;
 // when taken[i] = 1, means we already have taken ith item
 int invalid = 0;
 for(i=0; i<n; i++) {
-    for(j=0; j<n; j++) if( !indegree[j] && !taken[j]    ) {
-        taken[j] = 1;
-        list[i] = j;
-        // in this step we are taking item j
-        // we'd update the indegree[k] of items that depended on j
-        for(k=0; k<n; k++)
-            if( !taken[k] && take[j][k] ) --indegree[k];
-        break;
+     for(j=0; j<n; j++){
+         if( !indegree[j] && !taken[j]    ) {
+            taken[j] = 1;
+            list[i] = j;
+            // in this step we are taking item j
+            // we'd update the indegree[k] of items that depended on j
+            for(k=0; k<n; k++){
+               if( !taken[k] && take[j][k] ) --indegree[k]; 
+            } 
+            break;
+        }
     }
     if( j == n ) {
         invalid = 1;
